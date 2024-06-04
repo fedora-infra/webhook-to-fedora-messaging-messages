@@ -19,19 +19,19 @@ THING_SCHEMA = {
 }
 
 
-class WebhooktoFedoraMessagingMessagesMessage(message.Message):
+class Webhook2FedMsgBase(message.Message):
     """
     A sub-class of a Fedora message that defines a message schema for messages
-    published by Webhook to Fedora Messaging Messages.
+    published by Webhook to Fedora Messaging.
     """
 
     @property
     def app_name(self):
-        return "Webhook to Fedora Messaging Messages"
+        return "Webhook to Fedora Messaging"
 
     @property
     def app_icon(self):
-        return "https://apps.fedoraproject.org/img/icons/webhook-to-fedora-messaging-messages.png"
+        return "https://apps.fedoraproject.org/img/icons/webhook-to-fedora-messaging.png"
 
     @property
     def url(self):
