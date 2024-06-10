@@ -5,40 +5,20 @@
 from fedora_messaging import message
 
 
-SCHEMA_URL = "http://fedoraproject.org/message-schema/"
 
-THING_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "id": {"type": "number"},
-        "name": {"type": "string"},
-        "foobar": {"type": ["string", "null"]},
-        "url": {"type": "string", "format": "uri"},
-    },
-    "required": ["id", "name"],
-}
-
-
-class WebhookToFedoraMessagingMessage(message.Message):
+class Webhook2FedMsgBase(message.Message):
     """
     A sub-class of a Fedora message that defines a message schema for messages
-    published by Webhook To Fedora Messaging.
+    published by Webhook to Fedora Messaging.
     """
 
     @property
     def app_name(self):
-        return "Webhook To Fedora Messaging"
+        return "Webhook to Fedora Messaging"
 
     @property
     def app_icon(self):
         return "https://apps.fedoraproject.org/img/icons/webhook-to-fedora-messaging.png"
-
-    @property
-    def url(self):
-        try:
-            return self.body["thing"]["url"]
-        except KeyError:
-            return None
 
     @property
     def agent_name(self):
@@ -48,7 +28,7 @@ class WebhookToFedoraMessagingMessage(message.Message):
     @property
     def usernames(self):
         """List of users affected by the action that generated this message."""
-        return [self.agent_name]
+        return [self.agent_name] if self.agent_name is not None else []
 
     @property
     def groups(self):
