@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: LGPL-3.0-or-later
 
 from ..base import Webhook2FedMsgBase
-from . import summarize_repository_event
+from utils import summarize_repository_event
 
 
 class GithubMessageV1(Webhook2FedMsgBase):
@@ -37,7 +37,7 @@ class GithubMessageV1(Webhook2FedMsgBase):
         return self.body['headers']['X-Hub-Signature-256']
     
     @property
-    def event(self):
+    def event_name(self):
         return self.body['headers']["X-Github-Event"]
 
     @property
@@ -49,7 +49,7 @@ class GithubMessageV1(Webhook2FedMsgBase):
         if self.event_type == "repository":
             return summarize_repository_event()
         else:
-            return "Message has no summary"
+            return super().summary
 
     def __str__(self):
         return self.summary
