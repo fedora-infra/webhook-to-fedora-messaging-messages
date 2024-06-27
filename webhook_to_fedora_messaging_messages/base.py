@@ -36,22 +36,3 @@ class Webhook2FedMsgBase(message.Message):
         group = self.body.get("group")
         return [group] if group else []
 
-    @property
-    def packages(self):
-        """List of packages affected by the action that generated this message."""
-        return []
-
-    @property
-    def containers(self):
-        """List of containers affected by the action that generated this message."""
-        return []
-
-    @property
-    def modules(self):
-        """List of modules affected by the action that generated this message."""
-        return []
-
-    @property
-    def flatpaks(self):
-        """List of flatpaks affected by the action that generated this message."""
-        return []
