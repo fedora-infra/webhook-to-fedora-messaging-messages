@@ -6,7 +6,7 @@ def summarize_repository_event(event_type: str, payload: dict) -> str:
     elif event_type.startswith('pull_request'):
         summary = _summarize_pull_request_event(event_type, payload)
     elif event_type.startswith('issue'):
-        summary = _handle_issue_event(event_type, payload)
+        summary = _summarize_issue_event(event_type, payload)
     else:
         summary = "Event type not supported"
 
@@ -22,7 +22,7 @@ def _summarize_repository_event(event_type: str, payload: dict) -> str:
         raise NotImplementedError
 
 
-def _handle_issue_event(event_type: str, payload: dict) -> str:
+def _summarize_issue_event(event_type: str, payload: dict) -> str:
     if event_type == 'issues':
         return _summarize_issues_event(payload)
     elif event_type == 'issue_comment':
