@@ -37,6 +37,12 @@ class GithubMessageV1(Webhook2FedMsgBase):
         return self.body['headers']['X-Hub-Signature-256']
     
     @property
+    def agent_name(self):
+        """The username of the user who initiated the action that generated this message."""
+        return self.body['body']['sender']['login']
+    
+    
+    @property
     def event_name(self):
         return self.body['headers']["X-Github-Event"]
 
@@ -46,13 +52,12 @@ class GithubMessageV1(Webhook2FedMsgBase):
 
     @property
     def summary(self):
-        if self.event_type == "repository":
-            return summarize_repository_event()
-        else:
-            return super().summary
+        repo_name = self.body['body']['repository']['full_name']
+        return self.agent_name + " created " + self.event_name + (" on " + repo_name if repo_name is not None else "")
 
     def __str__(self):
-        return self.summary
+        if self.event_type == "repository":
+            return summarize_repository_event()
     
 
     body_schema = {
