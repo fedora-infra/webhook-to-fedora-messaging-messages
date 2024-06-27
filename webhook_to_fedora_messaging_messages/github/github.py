@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: LGPL-3.0-or-later
 
 from ..base import Webhook2FedMsgBase
-from utils import summarize_repository_event
+from .utils import summarize_repository_event
 
 
 class GithubMessageV1(Webhook2FedMsgBase):
