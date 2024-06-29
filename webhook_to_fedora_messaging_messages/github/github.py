@@ -17,29 +17,23 @@ class GithubMessageV1(Webhook2FedMsgBase):
     
     @property
     def signature(self):
-        """
-            SHA1 signature of the request.
-        """
+        """SHA1 signature of the request"""
         return self.body['headers']['X-Hub-Signature']
     
     @property
     def delivery(self):
-        """
-            A globally unique identifier (GUID) to identify the event.
-        """
+        """A globally unique identifier (GUID) to identify the event"""
         return self.body['headers']['X-Github-Delivery']
     
     @property
     def signature_sha256(self):
-        """
-            SHA1-256 signature of the request.
-        """
+        """SHA1-256 signature of the request"""
         return self.body['headers']['X-Hub-Signature-256']
     
     @property
     def agent_name(self):
-        """The username of the user who initiated the action that generated this message."""
-        return self.body['body']['sender']['login']
+        """The username of the user who initiated the action that generated this message"""
+        return self.body['sender']['login']
     
     
     @property
@@ -52,7 +46,7 @@ class GithubMessageV1(Webhook2FedMsgBase):
 
     @property
     def summary(self):
-        repo_name = self.body['body']['repository']['full_name']
+        repo_name = self.body['repository']['full_name']
         return self.agent_name + " created " + self.event_name + (" on " + repo_name if repo_name is not None else "")
 
     def __str__(self):
