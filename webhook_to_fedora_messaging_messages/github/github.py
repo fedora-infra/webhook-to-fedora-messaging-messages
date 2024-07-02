@@ -31,11 +31,6 @@ class GithubMessageV1(Webhook2FedMsgBase):
         return self.body['headers']['X-Hub-Signature-256']
     
     @property
-    def agent_name(self):
-        """The username of the user who initiated the action that generated this message"""
-        return self.body['body']['sender']['login']
-    
-    @property
     def event_name(self):
         return self.body['headers']["X-Github-Event"]
 
