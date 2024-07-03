@@ -1,11 +1,10 @@
-
 def summarize_repository_event(event_type: str, payload: dict) -> str:
-    
-    if event_type in ['push', 'fork']:
+
+    if event_type in ["push", "fork"]:
         summary = _summarize_repository_event(event_type, payload)
-    elif event_type.startswith('pull_request'):
+    elif event_type.startswith("pull_request"):
         summary = _summarize_pull_request_event(event_type, payload)
-    elif event_type.startswith('issue'):
+    elif event_type.startswith("issue"):
         summary = _summarize_issue_event(event_type, payload)
     else:
         summary = "Event type not supported"
@@ -14,33 +13,35 @@ def summarize_repository_event(event_type: str, payload: dict) -> str:
 
 
 def _summarize_repository_event(event_type: str, payload: dict) -> str:
-    if event_type == 'push':
+    if event_type == "push":
         return _summarize_push_event(payload)
-    elif event_type == 'fork':
+    elif event_type == "fork":
         return _summarize_fork_event(payload)
     else:
         raise NotImplementedError
 
 
 def _summarize_issue_event(event_type: str, payload: dict) -> str:
-    if event_type == 'issues':
+    if event_type == "issues":
         return _summarize_issues_event(payload)
-    elif event_type == 'issue_comment':
+    elif event_type == "issue_comment":
         return _summarize_issue_comment_event(payload)
     else:
         raise NotImplementedError
-    
-    
+
+
 def _summarize_push_event(payload):
-    repository = payload['repository']['name']
-    repository_url = payload['repository']['html_url']
-    pusher = payload['pusher']['name']
+    repository = payload["repository"]["name"]
+    repository_url = payload["repository"]["html_url"]
+    pusher = payload["pusher"]["name"]
     pusher_url = f"https://github.com/{payload['pusher']['name']}"
-    branch = payload['ref'].split('/')[-1]
-    commits = "\n".join([
-        f"Commit: {commit['message']} by {commit['author']['name']} ({commit['url']})"
-        for commit in payload['commits']
-    ])
+    branch = payload["ref"].split("/")[-1]
+    commits = "\n".join(
+        [
+            f"Commit: {commit['message']} by {commit['author']['name']} ({commit['url']})"
+            for commit in payload["commits"]
+        ]
+    )
 
     return (
         f"Event: Push\n"
@@ -50,13 +51,14 @@ def _summarize_push_event(payload):
         f"Commits:\n{commits}"
     )
 
+
 def _summarize_fork_event(payload):
-    repository = payload['repository']['name']
-    repository_url = payload['repository']['html_url']
-    forkee = payload['forkee']['name']
-    forkee_url = payload['forkee']['html_url']
-    owner = payload['forkee']['owner']['login']
-    owner_url = payload['forkee']['owner']['html_url']
+    repository = payload["repository"]["name"]
+    repository_url = payload["repository"]["html_url"]
+    forkee = payload["forkee"]["name"]
+    forkee_url = payload["forkee"]["html_url"]
+    owner = payload["forkee"]["owner"]["login"]
+    owner_url = payload["forkee"]["owner"]["html_url"]
 
     return (
         f"Event: Fork\n"
@@ -65,17 +67,18 @@ def _summarize_fork_event(payload):
         f"Owner: {owner} ({owner_url})"
     )
 
+
 def _summarize_pull_request_event(payload):
-    repository = payload['repository']['name']
-    repository_url = payload['repository']['html_url']
-    pr = payload['pull_request']
-    title = pr['title']
-    pr_url = pr['html_url']
-    author = pr['user']['login']
-    status = payload['action']
-    source_branch = pr['head']['ref']
-    dest_branch = pr['base']['ref']
-    reviewers = ", ".join([reviewer['login'] for reviewer in pr['requested_reviewers']])
+    repository = payload["repository"]["name"]
+    repository_url = payload["repository"]["html_url"]
+    pr = payload["pull_request"]
+    title = pr["title"]
+    pr_url = pr["html_url"]
+    author = pr["user"]["login"]
+    status = payload["action"]
+    source_branch = pr["head"]["ref"]
+    dest_branch = pr["base"]["ref"]
+    reviewers = ", ".join([reviewer["login"] for reviewer in pr["requested_reviewers"]])
 
     return (
         f"Event: Pull Request\n"
@@ -89,15 +92,16 @@ def _summarize_pull_request_event(payload):
         f"Reviewers: {reviewers}"
     )
 
+
 def _summarize_issues_event(payload):
-    repository = payload['repository']['name']
-    repository_url = payload['repository']['html_url']
-    issue = payload['issue']
-    title = issue['title']
-    issue_url = issue['html_url']
-    author = issue['user']['login']
-    status = payload['action']
-    labels = ", ".join([label['name'] for label in issue['labels']])
+    repository = payload["repository"]["name"]
+    repository_url = payload["repository"]["html_url"]
+    issue = payload["issue"]
+    title = issue["title"]
+    issue_url = issue["html_url"]
+    author = issue["user"]["login"]
+    status = payload["action"]
+    labels = ", ".join([label["name"] for label in issue["labels"]])
 
     return (
         f"Event: Issue\n"
@@ -109,16 +113,17 @@ def _summarize_issues_event(payload):
         f"Labels: {labels}"
     )
 
+
 def _summarize_issue_comment_event(payload):
-    repository = payload['repository']['name']
-    repository_url = payload['repository']['html_url']
-    issue = payload['issue']
-    issue_title = issue['title']
-    issue_url = issue['html_url']
-    comment = payload['comment']
-    comment_author = comment['user']['login']
-    comment_body = comment['body']
-    comment_url = comment['html_url']
+    repository = payload["repository"]["name"]
+    repository_url = payload["repository"]["html_url"]
+    issue = payload["issue"]
+    issue_title = issue["title"]
+    issue_url = issue["html_url"]
+    comment = payload["comment"]
+    comment_author = comment["user"]["login"]
+    comment_body = comment["body"]
+    comment_url = comment["html_url"]
 
     return (
         f"Event: Issue Comment\n"
