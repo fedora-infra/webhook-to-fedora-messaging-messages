@@ -5,7 +5,6 @@
 from fedora_messaging import message
 
 
-
 class Webhook2FedMsgBase(message.Message):
     """
     A sub-class of a Fedora message that defines a message schema for messages
@@ -23,7 +22,7 @@ class Webhook2FedMsgBase(message.Message):
     @property
     def agent_name(self):
         """The username of the user who initiated the action that generated this message."""
-        return self.body.get("agent")
+        return self.body['body'].get("agent")
 
     @property
     def usernames(self):
