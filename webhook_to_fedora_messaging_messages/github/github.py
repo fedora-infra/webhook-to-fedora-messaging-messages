@@ -41,12 +41,11 @@ class GithubMessageV1(Webhook2FedMsgBase):
     @property
     def summary(self):
         repo_name = self.body["body"]["repository"]["full_name"]
-        return (
-            self.agent_name
-            + " created "
-            + self.event_name
-            + (" on " + repo_name if repo_name is not None else "")
-        )
+        text = f"{self.agent_name} created {self.event_name}"
+        if repo_name is not None:
+            text += f" on {repo_name}"
+        return text
+        
 
     def __str__(self):
         if self.event_type == "repository":
