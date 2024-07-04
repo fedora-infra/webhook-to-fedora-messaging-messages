@@ -24,7 +24,6 @@ class TestRepo:
         }
 
         body = {
-            "agent": "fasUsernameExample",
             "ref": "refs/heads/main",
             "before": "8017283d32098eb99dce6aeee3b93831efd0f517",
             "after": "d5fd1a6b22a3d65272f9ae6c18d4581a5747682c",
@@ -204,7 +203,7 @@ class TestRepo:
             },
         }
 
-        msg = GithubMessageV1(body={"body": body, "headers": headers})
+        msg = GithubMessageV1(body={"body": body, "headers": headers, 'agent': 'fasUsernameExample'})
         msg.validate()
         assert msg.app_name == "Github"
         assert msg.agent_name == "fasUsernameExample"
@@ -218,11 +217,10 @@ class TestRepo:
         )
         assert msg.target_id == "807808293"
         assert msg.summary == "fasUsernameExample created push on brngylni/demo_repo"
-        assert (
-            str(msg)
-            == "Event: Push\nRepository: demo_repo (https://github.com/brngylni/demo_repo)\n\
-            Pusher: brngylni (https://github.com/brngylni)\nBranch: main\n\
-                Commits:\nCommit: djs by Super User (https://github.com/brngylni/demo_repo/commit/d5fd1a6b22a3d65272f9ae6c18d4581a5747682c)"
+        assert str(msg) == (
+            "Event: Push\nRepository: demo_repo (https://github.com/brngylni/demo_repo)\n"
+            "Pusher: brngylni (https://github.com/brngylni)\nBranch: main\n"
+            "Commits:\nCommit: djs by Super User (https://github.com/brngylni/demo_repo/commit/d5fd1a6b22a3d65272f9ae6c18d4581a5747682c)"
         )
         assert msg.usernames == ["fasUsernameExample"]
         assert msg.groups == []
@@ -244,13 +242,12 @@ class TestRepo:
             "X-Github-Hook-Installation-Target-Id": "807808293",
             "X-Github-Hook-Installation-Target-Type": "repository",
             "X-Hub-Signature": "sha1=3b290912b53d4eb42a604b1a900e5818ab54f3df",
-            "X-Hub-Signature-256": "sha256=4449c05bc6e50e075c9962a04\
-                227527045ba0e85a04327a64d0aabf141497e19",
+            "X-Hub-Signature-256": ("sha256=4449c05bc6e50e075c9962a04"
+                "227527045ba0e85a04327a64d0aabf141497e19"),
             "Accept-Encoding": "gzip",
         }
 
         body = {
-            "agent": "fasUsernameExample",
             "forkee": {
                 "id": 821774289,
                 "node_id": "R_kgDOMPtH0Q",
@@ -474,7 +471,7 @@ class TestRepo:
             },
         }
 
-        msg = GithubMessageV1(body={"body": body, "headers": headers})
+        msg = GithubMessageV1(body={"body": body, "headers": headers, "agent": "fasUsernameExample"})
         msg.validate()
         print(msg)
         print("printedd")
@@ -482,23 +479,20 @@ class TestRepo:
         assert msg.agent_name == "fasUsernameExample"
         assert msg.event_name == "fork"
         assert msg.event_type == "repository"
-        assert (
-            msg.signature
-            == "sha1=3b290912b53d4eb42a604b1\
-            a900e5818ab54f3df"
+        assert msg.signature == (
+             "sha1=3b290912b53d4eb42a604b1"
+            "a900e5818ab54f3df"
         )
-        assert (
-            msg.signature_sha256
-            == "sha256=4449c05bc6e50e075c9962a042\
-            27527045ba0e85a04327a64d0aabf141497e19"
+        assert msg.signature_sha256 == (
+            "sha256=4449c05bc6e50e075c9962a042"
+            "27527045ba0e85a04327a64d0aabf141497e19"
         )
         assert msg.target_id == "807808293"
         assert msg.summary == "fasUsernameExample created fork on brngylni/demo_repo"
-        assert (
-            str(msg)
-            == "Event: Fork\nRepository: demo_repo (https://github.com/brngylni/demo_repo)\n\
-            Forkee: demo_repo (https://github.com/Demo-Webhook/demo_repo)\n\
-                Owner: Demo-Webhook (https://github.com/Demo-Webhook)"
+        assert str(msg) == (
+            "Event: Fork\nRepository: demo_repo (https://github.com/brngylni/demo_repo)\n"
+            "Forkee: demo_repo (https://github.com/Demo-Webhook/demo_repo)\n"
+            "Owner: Demo-Webhook (https://github.com/Demo-Webhook)"
         )
         assert (
             msg.app_icon
