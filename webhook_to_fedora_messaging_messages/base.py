@@ -22,7 +22,7 @@ class Webhook2FedMsgBase(message.Message):
     @property
     def agent_name(self):
         """The username of the user who initiated the action that generated this message."""
-        return self.body["body"].get("agent")
+        return self.body.get("agent")
 
     @property
     def usernames(self):
