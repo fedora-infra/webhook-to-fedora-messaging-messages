@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2024 Contributors to the Fedora Project
+#
+# SPDX-License-Identifier: LGPL-3.0-or-later
+
 from webhook_to_fedora_messaging_messages.github.github import GithubMessageV1
 
 
@@ -203,7 +207,9 @@ class TestRepo:
             },
         }
 
-        msg = GithubMessageV1(body={"body": body, "headers": headers, 'agent': 'fasUsernameExample'})
+        msg = GithubMessageV1(
+            body={"body": body, "headers": headers, "agent": "fasUsernameExample"}
+        )
         msg.validate()
         assert msg.app_name == "Github"
         assert msg.agent_name == "fasUsernameExample"
@@ -242,8 +248,9 @@ class TestRepo:
             "X-Github-Hook-Installation-Target-Id": "807808293",
             "X-Github-Hook-Installation-Target-Type": "repository",
             "X-Hub-Signature": "sha1=3b290912b53d4eb42a604b1a900e5818ab54f3df",
-            "X-Hub-Signature-256": ("sha256=4449c05bc6e50e075c9962a04"
-                "227527045ba0e85a04327a64d0aabf141497e19"),
+            "X-Hub-Signature-256": (
+                "sha256=4449c05bc6e50e075c9962a04" "227527045ba0e85a04327a64d0aabf141497e19"
+            ),
             "Accept-Encoding": "gzip",
         }
 
@@ -471,7 +478,9 @@ class TestRepo:
             },
         }
 
-        msg = GithubMessageV1(body={"body": body, "headers": headers, "agent": "fasUsernameExample"})
+        msg = GithubMessageV1(
+            body={"body": body, "headers": headers, "agent": "fasUsernameExample"}
+        )
         msg.validate()
         print(msg)
         print("printedd")
@@ -479,13 +488,9 @@ class TestRepo:
         assert msg.agent_name == "fasUsernameExample"
         assert msg.event_name == "fork"
         assert msg.event_type == "repository"
-        assert msg.signature == (
-             "sha1=3b290912b53d4eb42a604b1"
-            "a900e5818ab54f3df"
-        )
+        assert msg.signature == ("sha1=3b290912b53d4eb42a604b1" "a900e5818ab54f3df")
         assert msg.signature_sha256 == (
-            "sha256=4449c05bc6e50e075c9962a042"
-            "27527045ba0e85a04327a64d0aabf141497e19"
+            "sha256=4449c05bc6e50e075c9962a042" "27527045ba0e85a04327a64d0aabf141497e19"
         )
         assert msg.target_id == "807808293"
         assert msg.summary == "fasUsernameExample created fork on brngylni/demo_repo"

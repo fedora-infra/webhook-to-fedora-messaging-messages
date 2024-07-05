@@ -2,6 +2,8 @@
 #
 # SPDX-License-Identifier: LGPL-3.0-or-later
 
+import typing
+
 from ..base import Webhook2FedMsgBase
 from .utils import summarize_repository_event
 
@@ -45,13 +47,12 @@ class GithubMessageV1(Webhook2FedMsgBase):
         if repo_name is not None:
             text += f" on {repo_name}"
         return text
-        
 
     def __str__(self):
         if self.event_type == "repository":
             return summarize_repository_event(self.event_name, self.body["body"])
 
-    body_schema = {
+    body_schema: typing.ClassVar = {
         "id": "http://fedoraproject.org/message-schema/webhook-to-fedora-message",
         "$schema": "http://json-schema.org/draft-04/schema#",
         "description": "Messages from github via webhook",
