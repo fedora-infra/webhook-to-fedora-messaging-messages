@@ -9,22 +9,22 @@ class TestRepo:
 
     def test_push(self):
         headers = {
-            "Host": "2e3d-31-223-50-82.ngrok-free.app",
-            "User-Agent": "GitHub-Hookshot/4e5b6c2",
-            "Content-Length": 7226,
-            "Accept": "*/*",
-            "Content-Type": "application/json",
-            "X-Forwarded-For": "140.82.115.123",
-            "X-Forwarded-Host": "2e3d-31-223-50-82.ngrok-free.app",
-            "X-Forwarded-Proto": "https",
-            "X-Github-Delivery": "2a49023a-201c-11ef-94cd-dbd2347128d4",
-            "X-Github-Event": "push",
-            "X-Github-Hook-Id": 481337580,
-            "X-Github-Hook-Installation-Target-Id": "807808293",
-            "X-Github-Hook-Installation-Target-Type": "repository",
-            "Accept-Encoding": "gzip",
-            "X-Hub-Signature": "sdflksdlfksdlfksdlfk",
-            "X-Hub-Signature-256": "sdflksdlfksdlfksdlfk",
+            "host": "2e3d-31-223-50-82.ngrok-free.app",
+            "user-agent": "GitHub-Hookshot/4e5b6c2",
+            "content-length": 7226,
+            "accept": "*/*",
+            "content-type": "application/json",
+            "x-forwarded-for": "140.82.115.123",
+            "x-forwarded-host": "2e3d-31-223-50-82.ngrok-free.app",
+            "x-forwarded-proto": "https",
+            "x-github-delivery": "2a49023a-201c-11ef-94cd-dbd2347128d4",
+            "x-github-event": "push",
+            "x-github-hook-id": 481337580,
+            "x-github-hook-installation-target-id": "807808293",
+            "x-github-hook-installation-target-type": "repository",
+            "accept-encoding": "gzip",
+            "x-hub-signature": "sdflksdlfksdlfksdlfk",
+            "x-hub-signature-256": "sdflksdlfksdlfksdlfk",
         }
 
         body = {
@@ -234,24 +234,24 @@ class TestRepo:
     def test_fork(self):
 
         headers = {
-            "Host": "1300-31-223-43-169.ngrok-free.app",
-            "User-Agent": "GitHub-Hookshot/9729b30",
-            "Content-Length": "10946",
-            "Accept": "*/*",
-            "Content-Type": "application/json",
-            "X-Forwarded-For": "140.82.115.96",
-            "X-Forwarded-Host": "1300-31-223-43-169.ngrok-free.app",
-            "X-Forwarded-Proto": "https",
-            "X-Github-Delivery": "2c88f570-360e-11ef-8a8c-b7d8d6902e14",
-            "X-Github-Event": "fork",
-            "X-Github-Hook-Id": "481337580",
-            "X-Github-Hook-Installation-Target-Id": "807808293",
-            "X-Github-Hook-Installation-Target-Type": "repository",
-            "X-Hub-Signature": "sha1=3b290912b53d4eb42a604b1a900e5818ab54f3df",
-            "X-Hub-Signature-256": (
-                "sha256=4449c05bc6e50e075c9962a04" "227527045ba0e85a04327a64d0aabf141497e19"
+            "host": "1300-31-223-43-169.ngrok-free.app",
+            "user-agent": "GitHub-Hookshot/9729b30",
+            "content-length": "10946",
+            "accept": "*/*",
+            "content-type": "application/json",
+            "x-forwarded-for": "140.82.115.96",
+            "x-forwarded-host": "1300-31-223-43-169.ngrok-free.app",
+            "x-forwarded-proto": "https",
+            "x-github-delivery": "2c88f570-360e-11ef-8a8c-b7d8d6902e14",
+            "x-github-event": "fork",
+            "x-github-hook-id": "481337580",
+            "x-github-hook-installation-target-id": "807808293",
+            "x-github-hook-installation-target-type": "repository",
+            "x-hub-signature": "sha1=3b290912b53d4eb42a604b1a900e5818ab54f3df",
+            "x-hub-signature-256": (
+                "sha256=4449c05bc6e50e075c9962a04227527045ba0e85a04327a64d0aabf141497e19"
             ),
-            "Accept-Encoding": "gzip",
+            "accept-encoding": "gzip",
         }
 
         body = {
