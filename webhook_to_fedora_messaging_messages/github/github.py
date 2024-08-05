@@ -15,30 +15,30 @@ class GithubMessageV1(Webhook2FedMsgBase):
 
     @property
     def target_id(self):
-        return self.body["headers"]["X-Github-Hook-Installation-Target-Id"]
+        return self.body["headers"]["x-github-hook-installation-target-id"]
 
     @property
     def signature(self):
         """SHA1 signature of the request"""
-        return self.body["headers"]["X-Hub-Signature"]
+        return self.body["headers"]["x-hub-signature"]
 
     @property
     def delivery(self):
         """A globally unique identifier (GUID) to identify the event"""
-        return self.body["headers"]["X-Github-Delivery"]
+        return self.body["headers"]["x-github-delivery"]
 
     @property
     def signature_sha256(self):
         """SHA1-256 signature of the request"""
-        return self.body["headers"]["X-Hub-Signature-256"]
+        return self.body["headers"]["x-hub-signature-256"]
 
     @property
     def event_name(self):
-        return self.body["headers"]["X-Github-Event"]
+        return self.body["headers"]["x-github-event"]
 
     @property
     def event_type(self):
-        return self.body["headers"]["X-Github-Hook-Installation-Target-Type"]
+        return self.body["headers"]["x-github-hook-installation-target-type"]
 
     @property
     def summary(self):
@@ -67,20 +67,20 @@ class GithubMessageV1(Webhook2FedMsgBase):
                 "description": "The headers of the webhook POST request from Github",
                 "type": "object",
                 "required": [
-                    "X-Github-Event",
-                    "X-Github-Hook-Installation-Target-Id",
-                    "X-Github-Hook-Installation-Target-Type",
-                    "X-Hub-Signature",
-                    "X-Hub-Signature-256",
-                    "X-Github-Delivery",
+                    "x-github-event",
+                    "x-github-hook-installation-target-id",
+                    "x-github-hook-installation-target-type",
+                    "x-hub-signature",
+                    "x-hub-signature-256",
+                    "x-github-delivery",
                 ],
                 "properties": {
-                    "X-Github-Event": {"type": "string"},
-                    "X-Github-Hook-Installation-Target-Id": {"type": "string"},
-                    "X-Github-Hook-Installation-Target-Type": {"type": "string"},
-                    "X-Hub-Signature": {"type": "string"},
-                    "X-Hub-Signature-256": {"type": "string"},
-                    "X-Github-Delivery": {"type": "string"},
+                    "x-github-event": {"type": "string"},
+                    "x-github-hook-installation-target-id": {"type": "string"},
+                    "x-github-hook-installation-target-type": {"type": "string"},
+                    "x-hub-signature": {"type": "string"},
+                    "x-hub-signature-256": {"type": "string"},
+                    "x-github-delivery": {"type": "string"},
                 },
             },
         },
