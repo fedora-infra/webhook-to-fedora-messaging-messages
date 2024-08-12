@@ -40,12 +40,13 @@ reuse = ">=1.1.0"
 line-length = 100
 
 [tool.ruff]
-select = ["E", "F", "W", "I", "UP", "S", "B", "RUF"]
 line-length = 100
-target-version = "py38"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "S", "B", "RUF"]
 # ignore = ["RUF010", "UP038"]
 
-[tool.ruff.per-file-ignores]
+[tool.ruff.lint.per-file-ignores]
 "tests/*" = ["S101"]
 "webhook_to_fedora_messaging_messages/__init__.py" = ["F401"]
 
