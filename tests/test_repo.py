@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: LGPL-3.0-or-later
 
-from webhook_to_fedora_messaging_messages.github.github import GithubMessageV1
+from webhook_to_fedora_messaging_messages.github import GithubMessageV1
 
 
 class TestRepo:

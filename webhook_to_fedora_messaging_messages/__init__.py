@@ -2,4 +2,4 @@
 #
 # SPDX-License-Identifier: LGPL-3.0-or-later
 
-from .github.github import GithubMessageV1
+from .github import GithubMessageV1
