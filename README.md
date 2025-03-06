@@ -1,6 +1,6 @@
 # Webhook To Fedora Messaging messages
 
-A schema package for [Webhook To Fedora Messaging](http://github.com/fedora-infra/webhook-to-fedora-messaging-messages).
+A schema package for [Webhook To Fedora Messaging](http://github.com/fedora-infra/webhook-to-fedora-messaging).
 
 See the [detailed documentation](https://fedora-messaging.readthedocs.io/en/latest/messages.html) on packaging your schemas.
 
