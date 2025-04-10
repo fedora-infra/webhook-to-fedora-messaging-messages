@@ -36,6 +36,7 @@ reuse = ">=1.1.0"
 
 [tool.poetry.plugins."fedora.messages"]
 "webhook_to_fedora_messaging.github.message_v1" = "webhook_to_fedora_messaging_messages.github:GitHubMessageV1"
+"webhook_to_fedora_messaging.forgejo.message_v1" = "webhook_to_fedora_messaging_messages.forgejo:ForgejoMessageV1"
 
 [tool.black]
 line-length = 100
