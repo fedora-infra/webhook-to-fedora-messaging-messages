@@ -8,49 +8,56 @@ from ..base import Webhook2FedMsgBase
 from .utils import summarize_repository_event
 
 
-class GithubMessageV1(Webhook2FedMsgBase):
+class GitHubMessageV1(Webhook2FedMsgBase):
     @property
-    def app_name(self):
-        return "Github"
+    def app_name(self) -> str:
+        """Application name on Fedora Messaging"""
+        return "GitHub"
 
     @property
-    def target_id(self):
+    def target_id(self) -> str:
+        """Webhook identifier specific to GitHub"""
         return self.body["headers"]["x-github-hook-installation-target-id"]
 
     @property
-    def signature(self):
-        """SHA1 signature of the request"""
-        return self.body["headers"]["x-hub-signature"]
-
-    @property
-    def delivery(self):
-        """A globally unique identifier (GUID) to identify the event"""
-        return self.body["headers"]["x-github-delivery"]
-
-    @property
-    def signature_sha256(self):
-        """SHA1-256 signature of the request"""
-        return self.body["headers"]["x-hub-signature-256"]
-
-    @property
-    def event_name(self):
-        return self.body["headers"]["x-github-event"]
-
-    @property
-    def event_type(self):
+    def target_type(self) -> str:
+        """Webhook type specific to GitHub"""
         return self.body["headers"]["x-github-hook-installation-target-type"]
 
     @property
-    def summary(self):
+    def delivery(self) -> str:
+        """Unique identifier (GUID) for event"""
+        return self.body["headers"]["x-github-delivery"]
+
+    @property
+    def signature(self) -> str:
+        """SHA160 signature of the request"""
+        return self.body["headers"]["x-hub-signature"]
+
+    @property
+    def signature_sha256(self) -> str:
+        """SHA256 signature of the request"""
+        return self.body["headers"]["x-hub-signature-256"]
+
+    @property
+    def event_name(self) -> str:
+        """Name of the GitHub event"""
+        return self.body["headers"]["x-github-event"]
+
+    @property
+    def summary(self) -> str:
+        """Summary of the GitHub event"""
         repo_name = self.body["body"]["repository"]["full_name"]
         text = f"{self.agent_name} created {self.event_name}"
         if repo_name is not None:
-            text += f" on {repo_name}"
+            text = f"{text} on {repo_name}"
         return text
 
-    def __str__(self):
-        if self.event_type == "repository":
+    def __str__(self) -> str:
+        """Specification of the GitHub event"""
+        if self.target_type == "repository":
             return summarize_repository_event(self.event_name, self.body["body"])
+        return "Event type not supported"
 
     body_schema: typing.ClassVar = {
         "id": "http://fedoraproject.org/message-schema/webhook-to-fedora-message",
@@ -60,11 +67,11 @@ class GithubMessageV1(Webhook2FedMsgBase):
         "required": ["body", "headers"],
         "properties": {
             "body": {
-                "description": "The body of the webhook POST request from Github",
+                "description": "The body of the webhook POST request from GitHub",
                 "type": "object",
             },
             "headers": {
-                "description": "The headers of the webhook POST request from Github",
+                "description": "The headers of the webhook POST request from GitHub",
                 "type": "object",
                 "required": [
                     "x-github-event",

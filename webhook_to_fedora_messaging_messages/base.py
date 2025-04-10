@@ -13,7 +13,7 @@ class Webhook2FedMsgBase(message.Message):
 
     @property
     def app_name(self):
-        return "Webhook to Fedora Messaging"
+        return "Webhook to Fedora Messaging"  # pragma: no cover
 
     @property
     def app_icon(self):
