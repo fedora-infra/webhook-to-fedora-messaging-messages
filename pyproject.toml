@@ -29,12 +29,13 @@ fedora-messaging = "^3.3.0"
 black = ">=22.6.0"
 pytest = ">=7.0.0"
 pytest-cov = ">=3.0.0"
+pytest-mock = "^3.14.0"
 coverage = {extras = ["toml"], version = ">=7.0.0"}
 ruff = ">=0.0.253"
 reuse = ">=1.1.0"
 
 [tool.poetry.plugins."fedora.messages"]
-"webhook_to_fedora_messaging.github.message_v1" = "webhook_to_fedora_messaging_messages.github:GithubMessageV1"
+"webhook_to_fedora_messaging.github.message_v1" = "webhook_to_fedora_messaging_messages.github:GitHubMessageV1"
 
 [tool.black]
 line-length = 100
@@ -47,7 +48,7 @@ select = ["E", "F", "W", "I", "UP", "S", "B", "RUF"]
 # ignore = ["RUF010", "UP038"]
 
 [tool.ruff.lint.per-file-ignores]
-"tests/*" = ["S101"]
+"tests/*" = ["S101", "F401", "E501"]
 "webhook_to_fedora_messaging_messages/__init__.py" = ["F401"]
 
 [tool.coverage.run]
