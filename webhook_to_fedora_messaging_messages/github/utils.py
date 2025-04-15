@@ -32,7 +32,7 @@ def _summarize_push_event(data) -> str:
     branch = data["ref"].split("/")[-1]
     commits = "\n".join(
         [
-            f"Commit: {commit['message']} by {commit['author']['name']} ({commit['url']})"
+            f"- {commit['id'][0:7]}: {commit['message'].splitlines()[0]} by {commit['author']['name']} ({commit['url']})"  # noqa: E501
             for commit in data["commits"]
         ]
     )
@@ -87,7 +87,7 @@ def _summarize_pull_request_event(data) -> str:
         f"Status: {status}\n"
         f"Source Branch: {pr_source_branch}\n"
         f"Destination Branch: {pr_dest_branch}\n"
-        f"Reviewers: {pr_reviewers}"
+        f"Requested Reviewers: {pr_reviewers}"
     )
 
 
