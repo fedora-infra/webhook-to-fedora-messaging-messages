@@ -6,10 +6,6 @@
 Event specification for GitHub "misc" event
 """
 
-summary = "testuser-w2fm created misc on gridhead/test-repo"
-
-string = ["Event type not supported"]
-
 headers = {
     "host": "w2fm.gridhead.net",
     "user-agent": "GitHub-Hookshot/1c76dbe",
@@ -41,7 +37,7 @@ body = {
         "private": True,
         "owner": {
             "name": "gridhead",
-            "email": "akashdeep.dhar@gmail.com",
+            "email": "testuser-w2fm@fedoraproject.org",
             "login": "gridhead",
             "id": 49605954,
             "node_id": "MDQ6VXNlcjQ5NjA1OTU0",
@@ -138,7 +134,7 @@ body = {
         "stargazers": 0,
         "master_branch": "main",
     },
-    "pusher": {"name": "gridhead", "email": "akashdeep.dhar@gmail.com"},
+    "pusher": {"name": "gridhead", "email": "testuser-w2fm@fedoraproject.org"},
     "sender": {
         "login": "gridhead",
         "id": 49605954,
@@ -170,17 +166,17 @@ body = {
             "id": "bb793868750af565b35f79e756dc4fac1b444672",
             "tree_id": "6178bc65ba5e6e8813305a18e2da16a07a68a77b",
             "distinct": True,
-            "message": "Add simple webhook receiver service - https://w2fm.gridhead.net\n\nSigned-off-by: Akashdeep Dhar <akashdeep.dhar@gmail.com>",
+            "message": "Add simple webhook receiver service - https://w2fm.gridhead.net\n\nSigned-off-by: Akashdeep Dhar <testuser-w2fm@fedoraproject.org>",
             "timestamp": "2025-04-10T06:32:19Z",
             "url": "https://github.com/gridhead/test-repo/commit/bb793868750af565b35f79e756dc4fac1b444672",
             "author": {
                 "name": "Akashdeep Dhar",
-                "email": "akashdeep.dhar@gmail.com",
+                "email": "testuser-w2fm@fedoraproject.org",
                 "username": "gridhead",
             },
             "committer": {
                 "name": "Akashdeep Dhar",
-                "email": "akashdeep.dhar@gmail.com",
+                "email": "testuser-w2fm@fedoraproject.org",
                 "username": "gridhead",
             },
             "added": ["flsk.py"],
@@ -192,17 +188,17 @@ body = {
         "id": "bb793868750af565b35f79e756dc4fac1b444672",
         "tree_id": "6178bc65ba5e6e8813305a18e2da16a07a68a77b",
         "distinct": True,
-        "message": "Add simple webhook receiver service - https://w2fm.gridhead.net\n\nSigned-off-by: Akashdeep Dhar <akashdeep.dhar@gmail.com>",
+        "message": "Add simple webhook receiver service - https://w2fm.gridhead.net\n\nSigned-off-by: Akashdeep Dhar <testuser-w2fm@fedoraproject.org>",
         "timestamp": "2025-04-10T06:32:19Z",
         "url": "https://github.com/gridhead/test-repo/commit/bb793868750af565b35f79e756dc4fac1b444672",
         "author": {
             "name": "Akashdeep Dhar",
-            "email": "akashdeep.dhar@gmail.com",
+            "email": "testuser-w2fm@fedoraproject.org",
             "username": "gridhead",
         },
         "committer": {
             "name": "Akashdeep Dhar",
-            "email": "akashdeep.dhar@gmail.com",
+            "email": "testuser-w2fm@fedoraproject.org",
             "username": "gridhead",
         },
         "added": ["flsk.py"],
