@@ -6,15 +6,6 @@
 Event specification for GitHub "fork" event
 """
 
-summary = "testuser-w2fm created fork on gridhead/test-repo"
-
-string = [
-    "Event: Fork",
-    "Repository: gridhead/test-repo (https://github.com/gridhead/test-repo)",
-    "Forkee: sumantro93/test-repo (https://github.com/sumantro93/test-repo)",
-    "Owner: sumantro93 (https://github.com/sumantro93)",
-]
-
 headers = {
     "host": "w2fm.gridhead.net",
     "user-agent": "GitHub-Hookshot/1c76dbe",

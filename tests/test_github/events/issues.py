@@ -6,18 +6,6 @@
 Event specification for GitHub "issues" event
 """
 
-summary = "testuser-w2fm created issues on gridhead/test-repo"
-
-string = [
-    "Event: Issue",
-    "Repository: gridhead/test-repo (https://github.com/gridhead/test-repo)",
-    "Title: This is a sample issue ticket",
-    "URL: https://github.com/gridhead/test-repo/issues/3",
-    "Author: gridhead",
-    "Status: opened",
-    "Labels: bug, documentation, duplicate, enhancement, help wanted, good first issue, invalid, question, wontfix",
-]
-
 headers = {
     "host": "w2fm.gridhead.net",
     "user-agent": "GitHub-Hookshot/1c76dbe",
