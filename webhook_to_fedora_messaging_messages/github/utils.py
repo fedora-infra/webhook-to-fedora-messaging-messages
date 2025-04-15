@@ -87,7 +87,7 @@ def _summarize_pull_request_event(data) -> str:
         f"Status: {status}\n"
         f"Source Branch: {pr_source_branch}\n"
         f"Destination Branch: {pr_dest_branch}\n"
-        f"Reviewers: {pr_reviewers}"
+        f"Requested Reviewers: {pr_reviewers}"
     )
 
 
