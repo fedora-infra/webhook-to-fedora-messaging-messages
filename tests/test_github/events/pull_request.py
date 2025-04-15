@@ -6,20 +6,6 @@
 Event specification for GitHub "pull_request" event
 """
 
-summary = "testuser-w2fm created pull_request on gridhead/test-repo"
-
-string = [
-    "Event: Pull Request",
-    "Repository: gridhead/test-repo (https://github.com/gridhead/test-repo)",
-    "Title: Add simple webhook receiver service - https://w2fm.gridhead.net",
-    "URL: https://github.com/gridhead/test-repo/pull/1",
-    "Author: gridhead",
-    "Status: opened",
-    "Source Branch: flsk",
-    "Destination Branch: main",
-    "Reviewers:",
-]
-
 headers = {
     "host": "w2fm.gridhead.net",
     "user-agent": "GitHub-Hookshot/1c76dbe",

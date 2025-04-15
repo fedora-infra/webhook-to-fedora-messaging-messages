@@ -6,82 +6,57 @@ import pytest
 
 from webhook_to_fedora_messaging_messages import GitHubMessageV1
 
-from .events import (
-    event_fork_body,
-    event_fork_headers,
-    event_fork_string,
-    event_fork_summary,
-    event_issue_comment_body,
-    event_issue_comment_headers,
-    event_issue_comment_string,
-    event_issue_comment_summary,
-    event_issues_body,
-    event_issues_headers,
-    event_issues_string,
-    event_issues_summary,
-    event_misc_body,
-    event_misc_headers,
-    event_misc_string,
-    event_misc_summary,
-    event_pull_request_body,
-    event_pull_request_headers,
-    event_pull_request_string,
-    event_pull_request_summary,
-    event_push_body,
-    event_push_headers,
-    event_push_string,
-    event_push_summary,
-)
+from . import events, results
 
 
 @pytest.mark.parametrize(
-    "headers, body, summary, string",
+    "headers, body, summary, specification",
     [
         pytest.param(
-            event_fork_headers,
-            event_fork_body,
-            event_fork_summary,
-            event_fork_string,
+            events.fork.headers,
+            events.fork.body,
+            results.fork.summary,
+            results.fork.specification,
             id="Testing schema for GitHub 'fork' event",
         ),
         pytest.param(
-            event_issue_comment_headers,
-            event_issue_comment_body,
-            event_issue_comment_summary,
-            event_issue_comment_string,
+            events.issue_comment.headers,
+            events.issue_comment.body,
+            results.issue_comment.summary,
+            results.issue_comment.specification,
             id="Testing schema for GitHub 'issue_comment' event",
         ),
         pytest.param(
-            event_issues_headers,
-            event_issues_body,
-            event_issues_summary,
-            event_issues_string,
+            events.issues.headers,
+            events.issues.body,
+            results.issues.summary,
+            results.issues.specification,
             id="Testing schema for GitHub 'issues' event",
         ),
         pytest.param(
-            event_pull_request_headers,
-            event_pull_request_body,
-            event_pull_request_summary,
-            event_pull_request_string,
+            events.pull_request.headers,
+            events.pull_request.body,
+            results.pull_request.summary,
+            results.pull_request.specification,
             id="Testing schema for GitHub 'pull_request' event",
         ),
         pytest.param(
-            event_push_headers,
-            event_push_body,
-            event_push_summary,
-            event_push_string,
+            events.push.headers,
+            events.push.body,
+            results.push.summary,
+            results.push.specification,
             id="Testing schema for GitHub 'push' event",
         ),
         pytest.param(
-            event_misc_headers,
-            event_misc_body,
-            event_misc_summary,
-            event_misc_string,
+            events.misc.headers,
+            events.misc.body,
+            results.misc.summary,
+            results.misc.specification,
             id="Testing schema for GitHub 'misc' event",
         ),
     ],
 )
-def test_github_events(headers, body, summary, string):
+def test_github_events(headers, body, summary, specification):
     """
     Test the GitHub schema across various GitHub events
     """
@@ -101,5 +76,22 @@ def test_github_events(headers, body, summary, string):
     )
     assert mesg.usernames == ["testuser-w2fm"]
     assert mesg.groups == []
-    for item in string:
-        assert item in str(mesg)
+    assert str(mesg) == specification
+
+
+def test_repo_name_none(body: dict = events.push.body, headers: dict = events.push.headers):
+    """
+    Test the circumstances where the repository name is not provided
+    """
+    body["repository"]["full_name"] = None
+    mesg = GitHubMessageV1(body={"body": body, "headers": headers, "agent": "testuser-w2fm"})
+    assert mesg.summary == "testuser-w2fm created push"
+
+
+def test_target_type_none(body: dict = events.push.body, headers: dict = events.push.headers):
+    """
+    Test the circumstances where the target type is not supported
+    """
+    headers["x-github-hook-installation-target-type"] = "misc"
+    mesg = GitHubMessageV1(body={"body": body, "headers": headers, "agent": "testuser-w2fm"})
+    assert str(mesg) == "Event type not supported"

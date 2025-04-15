@@ -6,17 +6,6 @@
 Event specification for GitHub "issue_comment" event
 """
 
-summary = "testuser-w2fm created issue_comment on gridhead/test-repo"
-
-string = [
-    "Event: Issue Comment",
-    "Repository: gridhead/test-repo (https://github.com/gridhead/test-repo)",
-    "Issue: This is a sample issue ticket (https://github.com/gridhead/test-repo/issues/2)",
-    "Comment Author: gridhead",
-    "Comment: Issue comment here",
-    "Comment URL: https://github.com/gridhead/test-repo/issues/2#issuecomment-2791741060",
-]
-
 headers = {
     "host": "w2fm.gridhead.net",
     "user-agent": "GitHub-Hookshot/1c76dbe",
