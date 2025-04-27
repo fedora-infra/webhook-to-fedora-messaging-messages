@@ -62,7 +62,9 @@ from . import events, results
         ),
     ],
 )
-def test_forgejo_events(headers, body, summary, specification, hashes):
+def test_forgejo_events(
+    headers: dict, body: dict, summary: str, specification: str, hashes: dict
+) -> None:
     """
     Test the Forgejo schema across various Forgejo events
     """
@@ -84,7 +86,7 @@ def test_forgejo_events(headers, body, summary, specification, hashes):
     assert str(mesg) == specification
 
 
-def test_repo_name_none(body: dict = events.push.body, headers: dict = events.push.headers):
+def test_repo_name_none(body: dict = events.push.body, headers: dict = events.push.headers) -> None:
     """
     Test the circumstances where the repository name is not provided
     """

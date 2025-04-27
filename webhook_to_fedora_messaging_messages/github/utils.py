@@ -21,7 +21,7 @@ def summarize_repository_event(event_type: str, data: dict) -> str:
         return "Event type not supported"
 
 
-def _summarize_push_event(data) -> str:
+def _summarize_push_event(data: dict) -> str:
     """
     Obtain text specification for push event
     """
@@ -45,7 +45,7 @@ def _summarize_push_event(data) -> str:
     )
 
 
-def _summarize_fork_event(data) -> str:
+def _summarize_fork_event(data: dict) -> str:
     """
     Obtain text specification for fork event
     """
@@ -63,7 +63,7 @@ def _summarize_fork_event(data) -> str:
     )
 
 
-def _summarize_pull_request_event(data) -> str:
+def _summarize_pull_request_event(data: dict) -> str:
     """
     Obtain text specification for pull request event
     """
@@ -91,7 +91,7 @@ def _summarize_pull_request_event(data) -> str:
     )
 
 
-def _summarize_issues_event(data) -> str:
+def _summarize_issues_event(data: dict) -> str:
     """
     Obtain text specification for issues event
     """
@@ -113,7 +113,7 @@ def _summarize_issues_event(data) -> str:
     )
 
 
-def _summarize_issue_comment_event(data) -> str:
+def _summarize_issue_comment_event(data: dict) -> str:
     """
     Obtain text specification for issue comment event
     """
