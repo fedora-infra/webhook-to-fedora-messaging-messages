@@ -12,25 +12,25 @@ class Webhook2FedMsgBase(message.Message):
     """
 
     @property
-    def app_name(self):
+    def app_name(self) -> str:
         return "Webhook to Fedora Messaging"  # pragma: no cover
 
     @property
-    def app_icon(self):
+    def app_icon(self) -> str:
         return "https://apps.fedoraproject.org/img/icons/webhook-to-fedora-messaging.png"
 
     @property
-    def agent_name(self):
+    def agent_name(self) -> str:
         """The username of the user who initiated the action that generated this message."""
         return self.body.get("agent")
 
     @property
-    def usernames(self):
+    def usernames(self) -> list:
         """List of users affected by the action that generated this message."""
         return [self.agent_name] if self.agent_name is not None else []
 
     @property
-    def groups(self):
+    def groups(self) -> list:
         """List of groups affected by the action that generated this message."""
         group = self.body.get("group")
         return [group] if group else []

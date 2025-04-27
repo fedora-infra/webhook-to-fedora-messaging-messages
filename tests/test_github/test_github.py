@@ -56,7 +56,7 @@ from . import events, results
         ),
     ],
 )
-def test_github_events(headers, body, summary, specification):
+def test_github_events(headers: dict, body: dict, summary: str, specification: str) -> None:
     """
     Test the GitHub schema across various GitHub events
     """
@@ -79,7 +79,7 @@ def test_github_events(headers, body, summary, specification):
     assert str(mesg) == specification
 
 
-def test_repo_name_none(body: dict = events.push.body, headers: dict = events.push.headers):
+def test_repo_name_none(body: dict = events.push.body, headers: dict = events.push.headers) -> None:
     """
     Test the circumstances where the repository name is not provided
     """
@@ -88,7 +88,9 @@ def test_repo_name_none(body: dict = events.push.body, headers: dict = events.pu
     assert mesg.summary == "testuser-w2fm created push"
 
 
-def test_target_type_none(body: dict = events.push.body, headers: dict = events.push.headers):
+def test_target_type_none(
+    body: dict = events.push.body, headers: dict = events.push.headers
+) -> None:
     """
     Test the circumstances where the target type is not supported
     """
