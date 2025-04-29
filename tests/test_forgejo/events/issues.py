@@ -18,6 +18,8 @@ headers = {
     "x-forgejo-delivery": "a9f43ba1-b327-4076-aaee-f29bf753710c",
     "x-forwarded-for": "217.197.91.145",
     "x-forwarded-proto": "https",
+    "x-hub-signature": "sha1=f9a6aae9f318fffeaab18ecb093fd2a5867839b6",
+    "x-hub-signature-256": "sha256=be7518b5453cb3a6626726d301b2c80d53c04246e5d9a8e454b616d15a5e0b66",
 }
 
 body = {
