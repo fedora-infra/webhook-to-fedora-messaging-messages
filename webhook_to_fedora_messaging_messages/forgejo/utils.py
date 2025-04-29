@@ -2,15 +2,6 @@
 #
 # SPDX-License-Identifier: LGPL-3.0-or-later
 
-import json
-
-
-def serialize_body(data: dict) -> bytes:
-    """
-    Obtain deterministic string conversion of an object
-    """
-    return json.dumps(data, sort_keys=True, separators=(",", ":")).encode(encoding="utf-8")
-
 
 def summarize_repository_event(event_type: str, data: dict) -> str:
     """

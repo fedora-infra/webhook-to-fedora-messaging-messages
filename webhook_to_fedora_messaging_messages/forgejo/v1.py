@@ -3,10 +3,9 @@
 # SPDX-License-Identifier: LGPL-3.0-or-later
 
 import typing
-from hashlib import sha1, sha256
 
 from ..base import Webhook2FedMsgBase
-from .utils import serialize_body, summarize_repository_event
+from .utils import summarize_repository_event
 
 
 class ForgejoMessageV1(Webhook2FedMsgBase):
@@ -27,13 +26,13 @@ class ForgejoMessageV1(Webhook2FedMsgBase):
 
     @property
     def signature(self) -> str:
-        """SHA160 signature of the request - Computed"""
-        return f"sha1={sha1(serialize_body(self.body)).hexdigest()}"  # noqa: S324
+        """SHA160 signature of the request"""
+        return self.body["headers"]["x-hub-signature"]
 
     @property
     def signature_sha256(self) -> str:
-        """SHA256 signature of the request - Computed"""
-        return f"sha256={sha256(serialize_body(self.body)).hexdigest()}"
+        """SHA256 signature of the request"""
+        return self.body["headers"]["x-hub-signature-256"]
 
     @property
     def event_name(self) -> str:
@@ -70,10 +69,14 @@ class ForgejoMessageV1(Webhook2FedMsgBase):
                 "required": [
                     "x-forgejo-event",
                     "x-forgejo-delivery",
+                    "x-hub-signature",
+                    "x-hub-signature-256",
                 ],
                 "properties": {
                     "x-forgejo-event": {"type": "string"},
                     "x-forgejo-delivery": {"type": "string"},
+                    "x-hub-signature": {"type": "string"},
+                    "x-hub-signature-256": {"type": "string"},
                 },
             },
         },
