@@ -2,6 +2,4 @@
 #
 # SPDX-License-Identifier: LGPL-3.0-or-later
 
-from .forgejo import ForgejoMessageV1
-from .github import GitHubMessageV1
-from .gitlab import GitLabMessageV1
+from .v1 import GitLabMessageV1  # noqa: F401
