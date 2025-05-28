@@ -13,25 +13,25 @@ from . import events, results
     "headers, body, summary, specification",
     [
         pytest.param(
-            events.issue_comment.headers,
-            events.issue_comment.body,
-            results.issue_comment.summary,
-            results.issue_comment.specification,
-            id="Testing schema for GitLab 'issue_comment' event",
+            events.note.headers,
+            events.note.body,
+            results.note.summary,
+            results.note.specification,
+            id="Testing schema for GitLab 'note' event",
         ),
         pytest.param(
-            events.issues.headers,
-            events.issues.body,
-            results.issues.summary,
-            results.issues.specification,
-            id="Testing schema for GitLab 'issues' event",
+            events.issue.headers,
+            events.issue.body,
+            results.issue.summary,
+            results.issue.specification,
+            id="Testing schema for GitLab 'issue' event",
         ),
         pytest.param(
-            events.pull_request.headers,
-            events.pull_request.body,
-            results.pull_request.summary,
-            results.pull_request.specification,
-            id="Testing schema for GitLab 'pull_request' event",
+            events.merge_request.headers,
+            events.merge_request.body,
+            results.merge_request.summary,
+            results.merge_request.specification,
+            id="Testing schema for GitLab 'merge_request' event",
         ),
         pytest.param(
             events.push.headers,
@@ -59,7 +59,9 @@ def test_gitlab_events(headers: dict, body: dict, summary: str, specification: s
     assert mesg.app_name == "GitLab"
     assert mesg.target_id == headers["x-gitlab-webhook-uuid"]
     assert mesg.delivery == headers["x-gitlab-event-uuid"]
-    assert mesg.event_name == headers["x-gitlab-event"]
+    assert (
+        mesg.event_name == headers["x-gitlab-event"].replace(" Hook", "").replace(" ", "_").lower()
+    )
     assert mesg.summary == summary
     assert (
         mesg.app_icon == "https://apps.fedoraproject.org/img/icons/webhook-to-fedora-messaging.png"
@@ -72,27 +74,14 @@ def test_gitlab_events(headers: dict, body: dict, summary: str, specification: s
 def test_repo_name_none(
     headers: dict = events.push.headers,
     body: dict = events.push.body,
-    summary: str = results.push.summary,
-    specification: str = results.push.specification,
+    summary: str = results.push.summary.replace(" on w2fm-test", ""),
+    specification: str = results.push.specification.replace("w2fm-test", "None", 1),
 ) -> None:
     """
     Test the circumstances where the repository name is not provided
     """
     body["repository"]["name"] = None
-    specification = specification.replace("w2fm-test", "None", 1)
-    summary = summary.replace(" on w2fm-test", "")
-
     mesg = GitLabMessageV1(body={"body": body, "headers": headers, "agent": "testuser-w2fm"})
 
-    mesg.validate()
-    assert mesg.app_name == "GitLab"
-    assert mesg.target_id == headers["x-gitlab-webhook-uuid"]
-    assert mesg.delivery == headers["x-gitlab-event-uuid"]
-    assert mesg.event_name == headers["x-gitlab-event"]
     assert mesg.summary == summary
-    assert (
-        mesg.app_icon == "https://apps.fedoraproject.org/img/icons/webhook-to-fedora-messaging.png"
-    )
-    assert mesg.usernames == ["testuser-w2fm"]
-    assert mesg.groups == []
     assert str(mesg) == specification

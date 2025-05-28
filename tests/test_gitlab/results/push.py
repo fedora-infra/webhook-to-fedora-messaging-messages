@@ -3,10 +3,10 @@
 # SPDX-License-Identifier: LGPL-3.0-or-later
 
 """
-Result specification for GitLab "issue" event
+Result specification for GitLab "push" event
 """
 
-summary = "testuser-w2fm created Push Hook on w2fm-test"
+summary = "testuser-w2fm created push on w2fm-test"
 
 specification = """Event: Push
 Repository: w2fm-test (https://gitlab.com/sdglitched/w2fm-test)
