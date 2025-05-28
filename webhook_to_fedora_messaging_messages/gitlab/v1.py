@@ -27,7 +27,7 @@ class GitLabMessageV1(Webhook2FedMsgBase):
     @property
     def event_name(self) -> str:
         """Name of the GitLab event"""
-        return self.body["headers"]["x-gitlab-event"]
+        return self.body["headers"]["x-gitlab-event"].replace(" Hook", "").replace(" ", "_").lower()
 
     @property
     def summary(self) -> str:
