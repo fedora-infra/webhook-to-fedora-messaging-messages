@@ -7,14 +7,14 @@ def summarize_repository_event(event_type: str, data: dict) -> str:
     """
     Obtain text specification based on event type
     """
-    if event_type == "Push Hook":
+    if event_type == "push":
         return _summarize_push_event(data)
-    elif event_type == "Merge Request Hook":
-        return _summarize_pull_request_event(data)
-    elif event_type == "Issue Hook":
-        return _summarize_issues_event(data)
-    elif event_type == "Note Hook":
-        return _summarize_issue_comment_event(data)
+    elif event_type == "merge_request":
+        return _summarize_merge_request_event(data)
+    elif event_type == "issue":
+        return _summarize_issue_event(data)
+    elif event_type == "note":
+        return _summarize_note_event(data)
     else:
         return "Event type not supported"
 
@@ -43,9 +43,9 @@ def _summarize_push_event(data: dict) -> str:
     )
 
 
-def _summarize_pull_request_event(data: dict) -> str:
+def _summarize_merge_request_event(data: dict) -> str:
     """
-    Obtain text specification for pull request event
+    Obtain text specification for merge request event
     """
     repository_name = data["repository"]["name"]
     repository_url = data["repository"]["homepage"]
@@ -57,7 +57,7 @@ def _summarize_pull_request_event(data: dict) -> str:
     pr_reviewers = ", ".join([reviewer["username"] for reviewer in data["reviewers"]])
     status = data["object_attributes"]["state"]
     return (
-        f"Event: Pull Request\n"
+        f"Event: Merge Request\n"
         f"Repository: {repository_name} ({repository_url})\n"
         f"Title: {pr_title}\n"
         f"URL: {pr_url}\n"
@@ -69,9 +69,9 @@ def _summarize_pull_request_event(data: dict) -> str:
     )
 
 
-def _summarize_issues_event(data: dict) -> str:
+def _summarize_issue_event(data: dict) -> str:
     """
-    Obtain text specification for issues event
+    Obtain text specification for issue event
     """
     repository_name = data["repository"]["name"]
     repository_url = data["repository"]["homepage"]
@@ -91,9 +91,9 @@ def _summarize_issues_event(data: dict) -> str:
     )
 
 
-def _summarize_issue_comment_event(data: dict) -> str:
+def _summarize_note_event(data: dict) -> str:
     """
-    Obtain text specification for issue comment event
+    Obtain text specification for note event
     """
     repository_name = data["repository"]["name"]
     repository_url = data["repository"]["homepage"]
@@ -103,7 +103,7 @@ def _summarize_issue_comment_event(data: dict) -> str:
     comment_body = data["object_attributes"]["description"]
     comment_url = data["object_attributes"]["url"]
     return (
-        f"Event: Issue Comment\n"
+        f"Event: Note\n"
         f"Repository: {repository_name} ({repository_url})\n"
         f"Issue: {issue_title} ({issue_url})\n"
         f"Comment Author: {comment_author}\n"
