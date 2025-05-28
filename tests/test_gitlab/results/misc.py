@@ -3,9 +3,9 @@
 # SPDX-License-Identifier: LGPL-3.0-or-later
 
 """
-Result specification for GitLab "issue" event
+Result specification for GitLab "misc" event
 """
 
-summary = "testuser-w2fm created Misc Hook on w2fm-test"
+summary = "testuser-w2fm created misc on w2fm-test"
 
 specification = "Event type not supported"

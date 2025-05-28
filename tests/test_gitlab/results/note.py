@@ -3,12 +3,12 @@
 # SPDX-License-Identifier: LGPL-3.0-or-later
 
 """
-Result specification for GitLab "issue_comment" event
+Result specification for GitLab "note" event
 """
 
-summary = "testuser-w2fm created Note Hook on w2fm-test"
+summary = "testuser-w2fm created note on w2fm-test"
 
-specification = """Event: Issue Comment
+specification = """Event: Note
 Repository: w2fm-test (https://gitlab.com/sdglitched/w2fm-test)
 Issue: [TITLE] Test Issue 1 (https://gitlab.com/sdglitched/w2fm-test/-/issues/1)
 Comment Author: sdglitched

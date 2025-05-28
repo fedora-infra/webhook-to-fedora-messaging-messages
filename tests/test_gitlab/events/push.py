@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: LGPL-3.0-or-later
 
 """
-Event specification for GitLab "issues" event
+Event specification for GitLab "push" event
 """
 
 headers = {
