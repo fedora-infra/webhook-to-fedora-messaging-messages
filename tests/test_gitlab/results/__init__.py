@@ -2,4 +2,4 @@
 #
 # SPDX-License-Identifier: LGPL-3.0-or-later
 
-from . import issue_comment, issues, misc, pull_request, push
+from . import issue, merge_request, misc, note, push

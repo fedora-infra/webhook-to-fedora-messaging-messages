@@ -6,7 +6,7 @@
 Result specification for GitLab "issue" event
 """
 
-summary = "testuser-w2fm created Issue Hook on w2fm-test"
+summary = "testuser-w2fm created issue on w2fm-test"
 
 specification = """Event: Issue
 Repository: w2fm-test (https://gitlab.com/sdglitched/w2fm-test)
