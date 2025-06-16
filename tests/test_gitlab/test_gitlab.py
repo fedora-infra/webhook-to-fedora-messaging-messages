@@ -2,6 +2,8 @@
 #
 # SPDX-License-Identifier: LGPL-3.0-or-later
 
+from typing import Any
+
 import pytest
 
 from webhook_to_fedora_messaging_messages import GitLabMessageV1
@@ -49,7 +51,9 @@ from . import events, results
         ),
     ],
 )
-def test_gitlab_events(headers: dict, body: dict, summary: str, specification: str) -> None:
+def test_gitlab_events(
+    headers: dict[str, str], body: dict[str, Any], summary: str, specification: str
+) -> None:
     """
     Test the GitLab schema across various GitLab events
     """
@@ -72,8 +76,8 @@ def test_gitlab_events(headers: dict, body: dict, summary: str, specification: s
 
 
 def test_repo_name_none(
-    headers: dict = events.push.headers,
-    body: dict = events.push.body,
+    headers: dict[str, str] = events.push.headers,
+    body: dict[str, Any] = events.push.body,
     summary: str = results.push.summary.replace(" on w2fm-test", ""),
     specification: str = results.push.specification.replace("w2fm-test", "None", 1),
 ) -> None:

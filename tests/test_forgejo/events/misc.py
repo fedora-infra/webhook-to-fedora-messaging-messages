@@ -9,7 +9,7 @@ Event specification for Forgejo "misc" event
 headers = {
     "host": "w2fm.gridhead.net",
     "user-agent": "Go-http-client/1.1",
-    "content-length": 8411,
+    "content-length": "8411",
     "accept": "*/*",
     "accept-encoding": "gzip",
     "connection": "keep-alive",

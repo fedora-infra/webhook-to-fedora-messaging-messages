@@ -2,8 +2,10 @@
 #
 # SPDX-License-Identifier: LGPL-3.0-or-later
 
+from typing import Any
 
-def summarize_repository_event(event_type: str, data: dict) -> str:
+
+def summarize_repository_event(event_type: str, data: dict[str, Any]) -> str:
     """
     Obtain text specification based on event type
     """
@@ -21,7 +23,7 @@ def summarize_repository_event(event_type: str, data: dict) -> str:
         return "Event type not supported"
 
 
-def _summarize_push_event(data: dict) -> str:
+def _summarize_push_event(data: dict[str, Any]) -> str:
     """
     Obtain text specification for push event
     """
@@ -45,7 +47,7 @@ def _summarize_push_event(data: dict) -> str:
     )
 
 
-def _summarize_fork_event(data: dict) -> str:
+def _summarize_fork_event(data: dict[str, Any]) -> str:
     """
     Obtain text specification for fork event
     """
@@ -63,7 +65,7 @@ def _summarize_fork_event(data: dict) -> str:
     )
 
 
-def _summarize_pull_request_event(data: dict) -> str:
+def _summarize_pull_request_event(data: dict[str, Any]) -> str:
     """
     Obtain text specification for pull request event
     """
@@ -94,7 +96,7 @@ def _summarize_pull_request_event(data: dict) -> str:
     )
 
 
-def _summarize_issues_event(data: dict) -> str:
+def _summarize_issues_event(data: dict[str, Any]) -> str:
     """
     Obtain text specification for issues event
     """
@@ -116,7 +118,7 @@ def _summarize_issues_event(data: dict) -> str:
     )
 
 
-def _summarize_issue_comment_event(data: dict) -> str:
+def _summarize_issue_comment_event(data: dict[str, Any]) -> str:
     """
     Obtain text specification for issue comment event
     """

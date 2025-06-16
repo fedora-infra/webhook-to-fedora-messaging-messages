@@ -9,7 +9,7 @@ Event specification for GitHub "push" event
 headers = {
     "host": "w2fm.gridhead.net",
     "user-agent": "GitHub-Hookshot/1c76dbe",
-    "content-length": 7553,
+    "content-length": "7553",
     "accept": "*/*",
     "accept-encoding": "gzip",
     "connection": "keep-alive",

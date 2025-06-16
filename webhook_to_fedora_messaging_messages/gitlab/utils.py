@@ -3,7 +3,10 @@
 # SPDX-License-Identifier: LGPL-3.0-or-later
 
 
-def summarize_repository_event(event_type: str, data: dict) -> str:
+from typing import Any
+
+
+def summarize_repository_event(event_type: str, data: dict[str, Any]) -> str:
     """
     Obtain text specification based on event type
     """
@@ -19,7 +22,7 @@ def summarize_repository_event(event_type: str, data: dict) -> str:
         return "Event type not supported"
 
 
-def _summarize_push_event(data: dict) -> str:
+def _summarize_push_event(data: dict[str, Any]) -> str:
     """
     Obtain text specification for push event
     """
@@ -43,7 +46,7 @@ def _summarize_push_event(data: dict) -> str:
     )
 
 
-def _summarize_merge_request_event(data: dict) -> str:
+def _summarize_merge_request_event(data: dict[str, Any]) -> str:
     """
     Obtain text specification for merge request event
     """
@@ -69,7 +72,7 @@ def _summarize_merge_request_event(data: dict) -> str:
     )
 
 
-def _summarize_issue_event(data: dict) -> str:
+def _summarize_issue_event(data: dict[str, Any]) -> str:
     """
     Obtain text specification for issue event
     """
@@ -91,7 +94,7 @@ def _summarize_issue_event(data: dict) -> str:
     )
 
 
-def _summarize_note_event(data: dict) -> str:
+def _summarize_note_event(data: dict[str, Any]) -> str:
     """
     Obtain text specification for note event
     """

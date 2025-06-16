@@ -2,6 +2,8 @@
 #
 # SPDX-License-Identifier: LGPL-3.0-or-later
 
+from typing import Any
+
 import pytest
 
 from webhook_to_fedora_messaging_messages import GitHubMessageV1
@@ -56,7 +58,9 @@ from . import events, results
         ),
     ],
 )
-def test_github_events(headers: dict, body: dict, summary: str, specification: str) -> None:
+def test_github_events(
+    headers: dict[str, str], body: dict[str, Any], summary: str, specification: str
+) -> None:
     """
     Test the GitHub schema across various GitHub events
     """
@@ -79,7 +83,9 @@ def test_github_events(headers: dict, body: dict, summary: str, specification: s
     assert str(mesg) == specification
 
 
-def test_repo_name_none(body: dict = events.push.body, headers: dict = events.push.headers) -> None:
+def test_repo_name_none(
+    body: dict[str, Any] = events.push.body, headers: dict[str, str] = events.push.headers
+) -> None:
     """
     Test the circumstances where the repository name is not provided
     """
@@ -89,7 +95,7 @@ def test_repo_name_none(body: dict = events.push.body, headers: dict = events.pu
 
 
 def test_target_type_none(
-    body: dict = events.push.body, headers: dict = events.push.headers
+    body: dict[str, Any] = events.push.body, headers: dict[str, str] = events.push.headers
 ) -> None:
     """
     Test the circumstances where the target type is not supported

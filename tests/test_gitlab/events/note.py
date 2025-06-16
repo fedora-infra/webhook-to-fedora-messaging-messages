@@ -9,7 +9,7 @@ Event specification for GitLab "note" event
 headers = {
     "host": "w2fm.gridhead.net",
     "user-agent": "GitLab/18.1.0-pre",
-    "content-length": 4360,
+    "content-length": "4360",
     "accept": "*/*",
     "accept-encoding": "gzip, br",
     "connection": "keep-alive",

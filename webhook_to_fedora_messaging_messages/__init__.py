@@ -5,3 +5,5 @@
 from .forgejo import ForgejoMessageV1
 from .github import GitHubMessageV1
 from .gitlab import GitLabMessageV1
+
+__all__ = ("ForgejoMessageV1", "GitHubMessageV1", "GitLabMessageV1")
