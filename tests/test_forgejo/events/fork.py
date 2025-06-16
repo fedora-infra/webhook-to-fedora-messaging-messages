@@ -9,7 +9,7 @@ Event specification for Forgejo "fork" event
 headers = {
     "host": "w2fm.gridhead.net",
     "user-agent": "Go-http-client/1.1",
-    "content-length": 10250,
+    "content-length": "10250",
     "accept": "*/*",
     "accept-encoding": "gzip",
     "connection": "keep-alive",

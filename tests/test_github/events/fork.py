@@ -9,7 +9,7 @@ Event specification for GitHub "fork" event
 headers = {
     "host": "w2fm.gridhead.net",
     "user-agent": "GitHub-Hookshot/1c76dbe",
-    "content-length": 10966,
+    "content-length": "10966",
     "accept": "*/*",
     "accept-encoding": "gzip",
     "connection": "keep-alive",

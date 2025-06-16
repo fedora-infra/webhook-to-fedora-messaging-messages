@@ -9,7 +9,7 @@ Event specification for GitHub "issue_comment" event
 headers = {
     "host": "w2fm.gridhead.net",
     "user-agent": "GitHub-Hookshot/1c76dbe",
-    "content-length": 11736,
+    "content-length": "11736",
     "accept": "*/*",
     "accept-encoding": "gzip",
     "connection": "keep-alive",

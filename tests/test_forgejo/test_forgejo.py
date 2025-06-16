@@ -2,6 +2,8 @@
 #
 # SPDX-License-Identifier: LGPL-3.0-or-later
 
+from typing import Any
+
 import pytest
 
 from webhook_to_fedora_messaging_messages import ForgejoMessageV1
@@ -63,7 +65,11 @@ from . import events, results
     ],
 )
 def test_forgejo_events(
-    headers: dict, body: dict, summary: str, specification: str, hashes: dict
+    headers: dict[str, str],
+    body: dict[str, Any],
+    summary: str,
+    specification: str,
+    hashes: dict[str, str],
 ) -> None:
     """
     Test the Forgejo schema across various Forgejo events
@@ -86,7 +92,9 @@ def test_forgejo_events(
     assert str(mesg) == specification
 
 
-def test_repo_name_none(body: dict = events.push.body, headers: dict = events.push.headers) -> None:
+def test_repo_name_none(
+    body: dict[str, Any] = events.push.body, headers: dict[str, str] = events.push.headers
+) -> None:
     """
     Test the circumstances where the repository name is not provided
     """

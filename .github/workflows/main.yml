@@ -16,8 +16,8 @@ on:
 
 jobs:
 
-  lint:
-    name: Lint
+  tox:
+    name: Tox
     runs-on: ubuntu-latest
     container: fedorapython/fedora-python-tox:latest
     steps:
@@ -25,40 +25,20 @@ jobs:
 
       - name: Install dependencies
         run: |
-          dnf install -y pre-commit git libpq-devel krb5-devel
-          pip install poetry
-
-      - name: Mark the working directory as safe for Git
-        run: git config --global --add safe.directory $PWD
-
-      - name: Install the project
-        run: poetry install
-
-      - name: Run pre-commit checks
-        run: pre-commit run --all-files
-
-
-  unit-tests:
-    name: Unit tests
-    runs-on: ubuntu-latest
-    container: fedorapython/fedora-python-tox:latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Install dependencies
-        run: |
-          dnf install -y libpq-devel krb5-devel
+          dnf install -y git pre-commit libpq-devel krb5-devel
           pip install poetry
 
       - name: Mark the working directory as safe for Git
         run: git config --global --add safe.directory $PWD
 
       - name: Run the tests
-        run: tox -e ${{ matrix.pyver }}
+        run: tox -e ${{ matrix.toxenv }}
 
     strategy:
       matrix:
-        pyver:
+        toxenv:
+          - lint
+          - types
           - py39
           - py310
           - py311
@@ -71,8 +51,7 @@ jobs:
     name: Build distribution 📦
     runs-on: ubuntu-latest
     needs:
-      - lint
-      - unit-tests
+      - tox
 
     steps:
 

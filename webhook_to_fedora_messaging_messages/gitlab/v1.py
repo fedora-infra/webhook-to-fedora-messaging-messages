@@ -9,6 +9,7 @@ from .utils import summarize_repository_event
 
 
 class GitLabMessageV1(Webhook2FedMsgBase):
+
     @property
     def app_name(self) -> str:
         """Application name on Fedora Messaging"""

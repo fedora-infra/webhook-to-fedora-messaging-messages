@@ -9,7 +9,7 @@ Event specification for GitLab "push" event
 headers = {
     "host": "w2fm.gridhead.net",
     "user-agent": "GitLab/18.1.0-pre",
-    "content-length": 1862,
+    "content-length": "1862",
     "accept": "*/*",
     "accept-encoding": "gzip, br",
     "connection": "keep-alive",

@@ -9,7 +9,7 @@ Event specification for GitLab "issue" event
 headers = {
     "host": "w2fm.gridhead.net",
     "user-agent": "GitLab/18.1.0-pre",
-    "content-length": 6222,
+    "content-length": "6222",
     "accept": "*/*",
     "accept-encoding": "gzip, br",
     "connection": "keep-alive",

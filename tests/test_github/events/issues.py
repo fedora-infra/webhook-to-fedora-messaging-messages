@@ -9,7 +9,7 @@ Event specification for GitHub "issues" event
 headers = {
     "host": "w2fm.gridhead.net",
     "user-agent": "GitHub-Hookshot/1c76dbe",
-    "content-length": 8065,
+    "content-length": "8065",
     "accept": "*/*",
     "accept-encoding": "gzip",
     "connection": "keep-alive",

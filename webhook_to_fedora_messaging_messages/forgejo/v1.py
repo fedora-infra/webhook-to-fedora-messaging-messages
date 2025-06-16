@@ -17,7 +17,7 @@ class ForgejoMessageV1(Webhook2FedMsgBase):
     @property
     def target_id(self) -> str:
         """Webhook identifier specific to Forgejo"""
-        return self.body["body"]["repository"]["id"]
+        return typing.cast(str, self.body["body"]["repository"]["id"])
 
     @property
     def delivery(self) -> str:

@@ -2,4 +2,6 @@
 #
 # SPDX-License-Identifier: LGPL-3.0-or-later
 
-from .v1 import GitHubMessageV1  # noqa: F401
+from .v1 import GitHubMessageV1
+
+__all__ = ("GitHubMessageV1",)

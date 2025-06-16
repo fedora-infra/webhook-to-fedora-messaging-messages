@@ -9,7 +9,7 @@ Event specification for GitLab "merge_request" event
 headers = {
     "host": "w2fm.gridhead.net",
     "user-agent": "GitLab/18.1.0-pre",
-    "content-length": 8172,
+    "content-length": "8172",
     "accept": "*/*",
     "accept-encoding": "gzip, br",
     "connection": "keep-alive",

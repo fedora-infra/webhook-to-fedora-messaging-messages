@@ -9,7 +9,7 @@ Event specification for GitHub "pull_request" event
 headers = {
     "host": "w2fm.gridhead.net",
     "user-agent": "GitHub-Hookshot/1c76dbe",
-    "content-length": 23906,
+    "content-length": "23906",
     "accept": "*/*",
     "accept-encoding": "gzip",
     "connection": "keep-alive",
