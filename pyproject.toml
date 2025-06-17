@@ -25,7 +25,6 @@ classifiers = [
 [tool.poetry.dependencies]
 python = "^3.9"
 fedora-messaging = "^3.8.0"
-pyright = "^1.1.402"
 
 [tool.poetry.group.dev.dependencies]
 black = ">=22.6.0"
@@ -36,6 +35,7 @@ coverage = {extras = ["toml"], version = ">=7.0.0"}
 ruff = ">=0.0.253"
 reuse = ">=1.1.0"
 mypy = "^1.16.0"
+pyright = "^1.1.402"
 
 [tool.poetry.plugins."fedora.messages"]
 "webhook_to_fedora_messaging.github.message_v1" = "webhook_to_fedora_messaging_messages.github:GitHubMessageV1"
