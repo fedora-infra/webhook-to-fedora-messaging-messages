@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "webhook-to-fedora-messaging-messages"
-version = "1.3.0"
+version = "1.4.0"
 description = "A schema package for messages sent by Webhook To Fedora Messaging"
 authors = ["Fedora Infrastructure Team <infrastructure@lists.fedoraproject.org>"]
 license = "LGPL-3.0-or-later"
