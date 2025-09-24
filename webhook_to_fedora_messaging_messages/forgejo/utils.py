@@ -19,6 +19,13 @@ def summarize_repository_event(event_type: str, data: dict[str, Any]) -> str:
         return _summarize_issues_event(data)
     elif event_type == "issue_comment":
         return _summarize_issue_comment_event(data)
+    elif event_type in [
+        "action_run_success",
+        "action_run_failure",
+        "action_run_recover",
+        "action_run_cancelled",
+    ]:
+        return _summarize_action_run_event(data)
     else:
         return "Event type not supported"
 
@@ -137,3 +144,43 @@ def _summarize_issue_comment_event(data: dict[str, Any]) -> str:
         f"Comment: {comment_body}\n"
         f"Comment URL: {comment_url}"
     )
+
+
+def _summarize_action_run_event(data: dict[str, Any]) -> str:
+    """
+    Obtain text specification for action run event
+    """
+    action = data["action"]
+    repository_name = data["run"]["repository"]["full_name"]
+    repository_url = data["run"]["repository"]["html_url"]
+    workflow_id = data["run"]["workflow_id"]
+    run_title = data["run"]["title"]
+    run_url = data["run"]["html_url"]
+    commit_id = data["run"]["commit_sha"][:7]
+    branch = data["run"]["prettyref"]
+    prior_status = data["prior_status"]
+    current_status = data["run"]["status"]
+
+    # Generate event title
+    event_title = f"Action Run {action.title()}"
+
+    # Generate status line with special handling for recover action
+    status_line = f"Status: {prior_status} → {current_status}"
+    if action == "recover":
+        status_line += " (recovered)"
+
+    result = (
+        f"Event: {event_title}\n"
+        f"Repository: {repository_name} ({repository_url})\n"
+        f"Workflow: {workflow_id}\n"
+        f"Run: {run_title} ({run_url})\n"
+        f"{status_line}\n"
+        f"Commit: {commit_id}\n"
+        f"Branch: {branch}"
+    )
+
+    if action == "recover" and "last_run" in data:
+        previous_run_id = data["last_run"]["id"]
+        result += f"\nPrevious Run: {previous_run_id} (failed)"
+
+    return result
