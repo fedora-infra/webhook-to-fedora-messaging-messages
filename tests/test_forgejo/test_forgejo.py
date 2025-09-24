@@ -62,6 +62,38 @@ from . import events, results
             results.misc.hashes,
             id="Testing schema for Forgejo 'misc' event",
         ),
+        pytest.param(
+            events.action_run_success.headers,
+            events.action_run_success.body,
+            results.action_run_success.summary,
+            results.action_run_success.specification,
+            results.action_run_success.hashes,
+            id="Testing schema for Forgejo 'action_run_success' event",
+        ),
+        pytest.param(
+            events.action_run_failure.headers,
+            events.action_run_failure.body,
+            results.action_run_failure.summary,
+            results.action_run_failure.specification,
+            results.action_run_failure.hashes,
+            id="Testing schema for Forgejo 'action_run_failure' event",
+        ),
+        pytest.param(
+            events.action_run_recover.headers,
+            events.action_run_recover.body,
+            results.action_run_recover.summary,
+            results.action_run_recover.specification,
+            results.action_run_recover.hashes,
+            id="Testing schema for Forgejo 'action_run_recover' event",
+        ),
+        pytest.param(
+            events.action_run_cancelled.headers,
+            events.action_run_cancelled.body,
+            results.action_run_cancelled.summary,
+            results.action_run_cancelled.specification,
+            results.action_run_cancelled.hashes,
+            id="Testing schema for Forgejo 'action_run_cancelled' event",
+        ),
     ],
 )
 def test_forgejo_events(
