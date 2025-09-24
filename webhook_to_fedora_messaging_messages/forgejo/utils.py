@@ -19,6 +19,8 @@ def summarize_repository_event(event_type: str, data: dict[str, Any]) -> str:
         return _summarize_issues_event(data)
     elif event_type == "issue_comment":
         return _summarize_issue_comment_event(data)
+    elif event_type == "action_run":
+        return _summarize_action_run_event(data)
     else:
         return "Event type not supported"
 
@@ -137,3 +139,51 @@ def _summarize_issue_comment_event(data: dict[str, Any]) -> str:
         f"Comment: {comment_body}\n"
         f"Comment URL: {comment_url}"
     )
+
+
+def _summarize_action_run_event(data: dict[str, Any]) -> str:
+    """
+    Obtain text specification for action run event
+    """
+    action = data["action"]
+    repository_name = data["repository"]["full_name"]
+    repository_url = data["repository"]["html_url"]
+    workflow_name = data["run"]["workflow_name"]
+    workflow_id = data["run"]["workflow_id"]
+    run_title = data["run"]["title"]
+    run_url = data["run"]["html_url"]
+    commit_id = data["run"]["head_commit"]["id"][:7]
+    commit_message = data["run"]["head_commit"]["message"]
+    commit_author = data["run"]["head_commit"]["author"]["name"]
+    branch = data["run"]["head_branch"]
+    prior_status = data["prior_status"]
+    current_status = data["run"]["status"]
+
+    if action == "success":
+        event_title = "Action Run Success"
+        status_line = f"Status: {current_status} → {current_status}"
+    elif action == "failure":
+        event_title = "Action Run Failure"
+        status_line = f"Status: {prior_status} → {current_status}"
+    elif action == "recover":
+        event_title = "Action Run Recover"
+        status_line = f"Status: {prior_status} → {current_status} (recovered)"
+    else:
+        event_title = f"Action Run {action.title()}"
+        status_line = f"Status: {prior_status} → {current_status}"
+
+    result = (
+        f"Event: {event_title}\n"
+        f"Repository: {repository_name} ({repository_url})\n"
+        f"Workflow: {workflow_name} ({workflow_id})\n"
+        f"Run: {run_title} ({run_url})\n"
+        f"{status_line}\n"
+        f"Commit: {commit_id}: {commit_message} by {commit_author}\n"
+        f"Branch: {branch}"
+    )
+
+    if action == "recover" and "last_run" in data:
+        previous_run_id = data["last_run"]["id"]
+        result += f"\nPrevious Run: {previous_run_id} (failed)"
+
+    return result
