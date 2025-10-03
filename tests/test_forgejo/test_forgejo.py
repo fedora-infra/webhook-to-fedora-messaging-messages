@@ -62,6 +62,38 @@ from . import events, results
             results.misc.hashes,
             id="Testing schema for Forgejo 'misc' event",
         ),
+        pytest.param(
+            events.action_run_success.headers,
+            events.action_run_success.body,
+            results.action_run_success.summary,
+            results.action_run_success.specification,
+            results.action_run_success.hashes,
+            id="Testing schema for Forgejo 'action_run_success' event",
+        ),
+        pytest.param(
+            events.action_run_failure.headers,
+            events.action_run_failure.body,
+            results.action_run_failure.summary,
+            results.action_run_failure.specification,
+            results.action_run_failure.hashes,
+            id="Testing schema for Forgejo 'action_run_failure' event",
+        ),
+        pytest.param(
+            events.action_run_recover.headers,
+            events.action_run_recover.body,
+            results.action_run_recover.summary,
+            results.action_run_recover.specification,
+            results.action_run_recover.hashes,
+            id="Testing schema for Forgejo 'action_run_recover' event",
+        ),
+        pytest.param(
+            events.action_run_cancelled.headers,
+            events.action_run_cancelled.body,
+            results.action_run_cancelled.summary,
+            results.action_run_cancelled.specification,
+            results.action_run_cancelled.hashes,
+            id="Testing schema for Forgejo 'action_run_cancelled' event",
+        ),
     ],
 )
 def test_forgejo_events(
@@ -78,7 +110,13 @@ def test_forgejo_events(
 
     mesg.validate()
     assert mesg.app_name == "Forgejo"
-    assert mesg.target_id == body["repository"]["id"]
+    # For action_run events, repository is nested in run object
+    if "run" in body and "repository" in body["run"]:
+        expected_target_id = body["run"]["repository"]["id"]
+    else:
+        # For regular events, repository is at top level
+        expected_target_id = body["repository"]["id"]
+    assert mesg.target_id == expected_target_id
     assert mesg.delivery == headers["x-forgejo-delivery"]
     assert mesg.signature == hashes["sha160"]
     assert mesg.signature_sha256 == hashes["sha256"]

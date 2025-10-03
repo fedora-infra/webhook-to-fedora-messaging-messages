@@ -17,6 +17,10 @@ class ForgejoMessageV1(Webhook2FedMsgBase):
     @property
     def target_id(self) -> str:
         """Webhook identifier specific to Forgejo"""
+        # For action_run events, repository is nested in run object
+        if "run" in self.body["body"] and "repository" in self.body["body"]["run"]:
+            return typing.cast(str, self.body["body"]["run"]["repository"]["id"])
+        # For regular events, repository is at top level
         return typing.cast(str, self.body["body"]["repository"]["id"])
 
     @property
@@ -42,7 +46,12 @@ class ForgejoMessageV1(Webhook2FedMsgBase):
     @property
     def summary(self) -> str:
         """Summary of the Forgejo event"""
-        repo_name = self.body["body"]["repository"]["full_name"]
+        # For action_run events, repository is nested in run object
+        if "run" in self.body["body"] and "repository" in self.body["body"]["run"]:
+            repo_name = self.body["body"]["run"]["repository"]["full_name"]
+        else:
+            # For regular events, repository is at top level
+            repo_name = self.body["body"]["repository"]["full_name"]
         text = f"{self.agent_name} created {self.event_name}"
         if repo_name is not None:
             text = f"{text} on {repo_name}"
