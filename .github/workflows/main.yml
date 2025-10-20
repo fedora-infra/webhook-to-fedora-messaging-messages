@@ -25,7 +25,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          dnf install -y git pre-commit libpq-devel krb5-devel
+          dnf install -y git pre-commit libpq-devel krb5-devel libatomic
           pip install poetry
 
       - name: Mark the working directory as safe for Git
