@@ -310,7 +310,7 @@ version = "3.4.7"
 description = "The Real First Universal Charset Detector. Open, modern and actively maintained alternative to Chardet."
 optional = false
 python-versions = ">=3.7"
-groups = ["main", "dev"]
+groups = ["main"]
 files = [
     {file = "charset_normalizer-3.4.7-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:cdd68a1fb318e290a2077696b7eb7a21a49163c455979c639bf5a5dcdc46617d"},
     {file = "charset_normalizer-3.4.7-cp310-cp310-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:e17b8d5d6a8c47c85e68ca8379def1303fd360c3e22093a807cd34a71cd082b8"},
@@ -1758,20 +1758,18 @@ dev = ["pre-commit", "pytest-asyncio", "tox"]
 
 [[package]]
 name = "python-debian"
-version = "1.1.0"
+version = "1.1.1"
 description = "Modules to read and manipulate many file formats related to Debian packages and repositories"
 optional = false
 python-versions = ">=3.7"
 groups = ["dev"]
 files = [
-    {file = "python_debian-1.1.0-py3-none-any.whl", hash = "sha256:3e553b6d0b886272a26649e13106e33c382bcd21c80b09f5c0c81fc7c8c8c743"},
-    {file = "python_debian-1.1.0.tar.gz", hash = "sha256:afe3c7267d81c29c79ab44d803a0756d0796b0e41bb0a05c5cafcdd2b980d4e6"},
+    {file = "python_debian-1.1.1-py3-none-any.whl", hash = "sha256:f98ae013e8e5310e49041cc3860a7105df73af73d4ff1d8afb474770d328a6ad"},
+    {file = "python_debian-1.1.1.tar.gz", hash = "sha256:fe4fc3dc798dbf1f0ef5865e2b1b4f7cc0352b6a511b25ab7594906c64a73629"},
 ]
 
-[package.dependencies]
-charset-normalizer = "*"
-
 [package.extras]
+encodings = ["charset-normalizer"]
 test = ["pytest", "pytest-cov"]
 
 [[package]]
