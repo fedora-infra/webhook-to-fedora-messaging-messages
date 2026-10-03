@@ -19,6 +19,8 @@ def summarize_repository_event(event_type: str, data: dict[str, Any]) -> str:
         return _summarize_issues_event(data)
     elif event_type == "issue_comment":
         return _summarize_issue_comment_event(data)
+    elif event_type == "ping":
+        return _summarize_ping_event(data)
     else:
         return "Event type not supported"
 
@@ -133,4 +135,22 @@ def _summarize_issue_comment_event(data: dict[str, Any]) -> str:
         f"Comment Author: {comment_author}\n"
         f"Comment: {comment_body}\n"
         f"Comment URL: {comment_url}"
+    )
+
+
+def _summarize_ping_event(data: dict[str, Any]) -> str:
+    """
+    Obtain text specification for ping event
+    """
+    repository_name = data["repository"]["full_name"]
+    repository_url = data["repository"]["html_url"]
+    hook_id = data["hook_id"]
+    hook_type = data["hook"]["type"]
+    zen = data["zen"]
+    return (
+        f"Event: Ping\n"
+        f"Repository: {repository_name} ({repository_url})\n"
+        f"Hook ID: {hook_id}\n"
+        f"Hook Type: {hook_type}\n"
+        f"Zen: {zen}"
     )

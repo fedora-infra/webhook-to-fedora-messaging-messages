@@ -50,6 +50,13 @@ from . import events, results
             id="Testing schema for GitHub 'push' event",
         ),
         pytest.param(
+            events.ping.headers,
+            events.ping.body,
+            results.ping.summary,
+            results.ping.specification,
+            id="Testing schema for GitHub 'ping' event",
+        ),
+        pytest.param(
             events.misc.headers,
             events.misc.body,
             results.misc.summary,
